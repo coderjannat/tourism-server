@@ -23,7 +23,7 @@ async function run() {
         const volunteerCollection = database.collection("destinations");
         const ticketsCollection = database.collection("tickets");
 
-
+          // get app
         app.get('/destinations', async(req, res) => {
             const query = {};
             const result = await volunteerCollection.find(query).toArray();
