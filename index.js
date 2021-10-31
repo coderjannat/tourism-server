@@ -63,20 +63,13 @@ async function run() {
             console.log(result);
           });
           
-          app.put("/tickets/:id", async (req,res) =>{
-            const updateTicket = req.body;
-            const options = {upsert:true};
-            const updateDoc ={
-              $set : {
-                name : updateUser.name
-              }
-            };
-            const result = await ticketsCollection.updateOne({
-                _id: ObjectId(req.params.id),
-                options
-              });
-              res.send(result);
-          })
+          app.get('/tickets/:id', async(req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await ticketsCollection.findOne(query)
+            res.json(result)
+        })
+          
 
           app.delete("/deletetickets/:id", async (req, res) => {
             console.log(req.params.id);
